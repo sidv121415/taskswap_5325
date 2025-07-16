@@ -130,6 +130,8 @@ class _HomeDashboardState extends State<HomeDashboard>
                       SizedBox(height: 2.h),
                       _buildTaskSummarySection(),
                       SizedBox(height: 3.h),
+                      _buildQuickActions(),
+                      SizedBox(height: 3.h),
                       _buildRecentActivitySection(),
                       SizedBox(height: 10.h), // Bottom padding for FAB
                     ],

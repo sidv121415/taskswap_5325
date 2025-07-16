@@ -81,7 +81,7 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppTheme.lightTheme.scaffoldBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -93,27 +93,34 @@ class _SignupScreenState extends State<SignupScreen> {
                 children: [
                   SizedBox(height: 32),
                   // Logo and Title
-                  Icon(
-                    Icons.swap_horizontal_circle,
-                    size: 60,
-                    color: Colors.blue,
+                  Container(
+                    width: 15.w,
+                    height: 15.w,
+                    decoration: BoxDecoration(
+                      color: AppTheme.lightTheme.colorScheme.primary,
+                      shape: BoxShape.circle,
+                    ),
+                    child: CustomIconWidget(
+                      iconName: 'assignment',
+                      color: Colors.white,
+                      size: 8.w,
+                    ),
                   ),
                   SizedBox(height: 16),
                   Text(
                     'Create Account',
-                    style: GoogleFonts.inter(
+                    style: AppTheme.lightTheme.textTheme.headlineMedium?.copyWith(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black87,
                     ),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 8),
                   Text(
                     'Join TaskSwap community',
-                    style: GoogleFonts.inter(
+                    style: AppTheme.lightTheme.textTheme.bodyLarge?.copyWith(
                       fontSize: 16,
-                      color: Colors.grey[600],
+                      color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -125,13 +132,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       labelText: 'Full Name',
-                      prefixIcon: Icon(Icons.person_outlined),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 16,
+                      prefixIcon: CustomIconWidget(
+                        iconName: 'person',
+                        color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                        size: 20,
                       ),
                     ),
                     validator: (value) {
@@ -149,13 +153,11 @@ class _SignupScreenState extends State<SignupScreen> {
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       labelText: 'Username',
-                      prefixIcon: Icon(Icons.alternate_email),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 16,
+                      prefixIcon: Text(
+                        '@',
+                        style: AppTheme.lightTheme.textTheme.bodyLarge?.copyWith(
+                          color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                        ),
                       ),
                     ),
                     validator: (value) {
@@ -177,13 +179,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       labelText: 'Email',
-                      prefixIcon: Icon(Icons.email_outlined),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 16,
+                      prefixIcon: CustomIconWidget(
+                        iconName: 'person',
+                        color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                        size: 20,
                       ),
                     ),
                     validator: (value) {
@@ -206,13 +205,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       labelText: 'Phone Number (Optional)',
-                      prefixIcon: Icon(Icons.phone_outlined),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 16,
+                      prefixIcon: CustomIconWidget(
+                        iconName: 'person',
+                        color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                        size: 20,
                       ),
                     ),
                   ),
@@ -225,25 +221,22 @@ class _SignupScreenState extends State<SignupScreen> {
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       labelText: 'Password',
-                      prefixIcon: Icon(Icons.lock_outlined),
+                      prefixIcon: CustomIconWidget(
+                        iconName: 'lock',
+                        color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                        size: 20,
+                      ),
                       suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscurePassword
-                              ? Icons.visibility_off
-                              : Icons.visibility,
+                        icon: CustomIconWidget(
+                          iconName: _obscurePassword ? 'visibility_off' : 'visibility',
+                          color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                          size: 20,
                         ),
                         onPressed: () {
                           setState(() {
                             _obscurePassword = !_obscurePassword;
                           });
                         },
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 16,
                       ),
                     ),
                     validator: (value) {
@@ -265,25 +258,22 @@ class _SignupScreenState extends State<SignupScreen> {
                     textInputAction: TextInputAction.done,
                     decoration: InputDecoration(
                       labelText: 'Confirm Password',
-                      prefixIcon: Icon(Icons.lock_outlined),
+                      prefixIcon: CustomIconWidget(
+                        iconName: 'lock',
+                        color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                        size: 20,
+                      ),
                       suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscureConfirmPassword
-                              ? Icons.visibility_off
-                              : Icons.visibility,
+                        icon: CustomIconWidget(
+                          iconName: _obscureConfirmPassword ? 'visibility_off' : 'visibility',
+                          color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                          size: 20,
                         ),
                         onPressed: () {
                           setState(() {
                             _obscureConfirmPassword = !_obscureConfirmPassword;
                           });
                         },
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 16,
                       ),
                     ),
                     validator: (value) {
@@ -302,14 +292,6 @@ class _SignupScreenState extends State<SignupScreen> {
                   // Sign Up Button
                   ElevatedButton(
                     onPressed: _isLoading ? null : _handleSignup,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      foregroundColor: Colors.white,
-                      padding: EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
                     child: _isLoading
                         ? SizedBox(
                             height: 20,
@@ -322,9 +304,10 @@ class _SignupScreenState extends State<SignupScreen> {
                           )
                         : Text(
                             'Sign Up',
-                            style: GoogleFonts.inter(
+                            style: AppTheme.lightTheme.textTheme.labelLarge?.copyWith(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
+                              color: Colors.white,
                             ),
                           ),
                   ),
@@ -336,8 +319,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     children: [
                       Text(
                         "Already have an account? ",
-                        style: GoogleFonts.inter(
-                          color: Colors.grey[600],
+                        style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
+                          color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                         ),
                       ),
                       GestureDetector(
@@ -346,8 +329,8 @@ class _SignupScreenState extends State<SignupScreen> {
                         },
                         child: Text(
                           'Login',
-                          style: GoogleFonts.inter(
-                            color: Colors.blue,
+                          style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
+                            color: AppTheme.lightTheme.colorScheme.primary,
                             fontWeight: FontWeight.w600,
                           ),
                         ),

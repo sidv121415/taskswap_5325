@@ -120,23 +120,27 @@ class _ConnectionRequestsScreenState extends State<ConnectionRequestsScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: AppTheme.lightTheme.scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppTheme.lightTheme.appBarTheme.backgroundColor,
         elevation: 0,
         title: Text(
           'Connection Requests',
-          style: GoogleFonts.inter(
-            color: Colors.black87,
-            fontWeight: FontWeight.w600,
+          style: AppTheme.lightTheme.appBarTheme.titleTextStyle,
+        ),
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: CustomIconWidget(
+            iconName: 'arrow_back',
+            color: AppTheme.lightTheme.colorScheme.onSurface,
+            size: 24,
           ),
         ),
-        iconTheme: IconThemeData(color: Colors.black87),
         bottom: TabBar(
           controller: _tabController,
-          labelColor: Colors.blue,
-          unselectedLabelColor: Colors.grey,
-          indicatorColor: Colors.blue,
+          labelColor: AppTheme.lightTheme.colorScheme.primary,
+          unselectedLabelColor: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+          indicatorColor: AppTheme.lightTheme.colorScheme.primary,
           tabs: [
             Tab(text: 'Received'),
             Tab(text: 'Sent'),
@@ -163,18 +167,18 @@ class _ConnectionRequestsScreenState extends State<ConnectionRequestsScreen>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.inbox_outlined,
+            CustomIconWidget(
+              iconName: 'inbox_outlined',
+              color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
               size: 64,
-              color: Colors.grey[400],
             ),
             SizedBox(height: 16),
             Text(
               'No pending requests',
-              style: GoogleFonts.inter(
+              style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
-                color: Colors.grey[600],
+                color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
               ),
             ),
           ],
@@ -203,18 +207,18 @@ class _ConnectionRequestsScreenState extends State<ConnectionRequestsScreen>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.send_outlined,
+            CustomIconWidget(
+              iconName: 'send_outlined',
+              color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
               size: 64,
-              color: Colors.grey[400],
             ),
             SizedBox(height: 16),
             Text(
               'No sent requests',
-              style: GoogleFonts.inter(
+              style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
-                color: Colors.grey[600],
+                color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
               ),
             ),
           ],
@@ -237,6 +241,7 @@ class _ConnectionRequestsScreenState extends State<ConnectionRequestsScreen>
       Map<String, dynamic> request, Map<String, dynamic> fromUser) {
     return Card(
       margin: EdgeInsets.only(bottom: 12),
+      color: AppTheme.lightTheme.cardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
@@ -247,7 +252,7 @@ class _ConnectionRequestsScreenState extends State<ConnectionRequestsScreen>
             // Profile Photo
             CircleAvatar(
               radius: 24,
-              backgroundColor: Colors.blue[100],
+              backgroundColor: AppTheme.lightTheme.colorScheme.primaryContainer,
               backgroundImage: fromUser['photo'] != null
                   ? NetworkImage(fromUser['photo'])
                   : null,
@@ -256,8 +261,8 @@ class _ConnectionRequestsScreenState extends State<ConnectionRequestsScreen>
                       (fromUser['name'] as String).isNotEmpty
                           ? (fromUser['name'] as String)[0].toUpperCase()
                           : 'U',
-                      style: GoogleFonts.inter(
-                        color: Colors.blue,
+                      style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
+                        color: AppTheme.lightTheme.colorScheme.primary,
                         fontWeight: FontWeight.w600,
                       ),
                     )
@@ -272,26 +277,25 @@ class _ConnectionRequestsScreenState extends State<ConnectionRequestsScreen>
                 children: [
                   Text(
                     fromUser['name'] ?? 'Unknown User',
-                    style: GoogleFonts.inter(
+                    style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: Colors.black87,
                     ),
                   ),
                   SizedBox(height: 4),
                   Text(
                     '@${fromUser['username'] ?? 'unknown'}',
-                    style: GoogleFonts.inter(
+                    style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
                       fontSize: 14,
-                      color: Colors.grey[600],
+                      color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                     ),
                   ),
                   SizedBox(height: 8),
                   Text(
                     'Wants to connect with you',
-                    style: GoogleFonts.inter(
+                    style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
                       fontSize: 12,
-                      color: Colors.grey[500],
+                      color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -304,7 +308,7 @@ class _ConnectionRequestsScreenState extends State<ConnectionRequestsScreen>
                 ElevatedButton(
                   onPressed: () => _acceptRequest(request['id']),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
+                    backgroundColor: AppTheme.lightTheme.colorScheme.tertiary,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -316,9 +320,10 @@ class _ConnectionRequestsScreenState extends State<ConnectionRequestsScreen>
                   ),
                   child: Text(
                     'Accept',
-                    style: GoogleFonts.inter(
+                    style: AppTheme.lightTheme.textTheme.labelMedium?.copyWith(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -326,8 +331,8 @@ class _ConnectionRequestsScreenState extends State<ConnectionRequestsScreen>
                 OutlinedButton(
                   onPressed: () => _declineRequest(request['id']),
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: Colors.red,
-                    side: BorderSide(color: Colors.red),
+                    foregroundColor: AppTheme.lightTheme.colorScheme.error,
+                    side: BorderSide(color: AppTheme.lightTheme.colorScheme.error),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -338,9 +343,10 @@ class _ConnectionRequestsScreenState extends State<ConnectionRequestsScreen>
                   ),
                   child: Text(
                     'Decline',
-                    style: GoogleFonts.inter(
+                    style: AppTheme.lightTheme.textTheme.labelMedium?.copyWith(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
+                      color: AppTheme.lightTheme.colorScheme.error,
                     ),
                   ),
                 ),
@@ -360,24 +366,25 @@ class _ConnectionRequestsScreenState extends State<ConnectionRequestsScreen>
 
     switch (status) {
       case 'pending':
-        statusColor = Colors.orange;
+        statusColor = AppTheme.warningLight;
         statusText = 'Pending';
         break;
       case 'accepted':
-        statusColor = Colors.green;
+        statusColor = AppTheme.lightTheme.colorScheme.tertiary;
         statusText = 'Accepted';
         break;
       case 'declined':
-        statusColor = Colors.red;
+        statusColor = AppTheme.lightTheme.colorScheme.error;
         statusText = 'Declined';
         break;
       default:
-        statusColor = Colors.grey;
+        statusColor = AppTheme.lightTheme.colorScheme.onSurfaceVariant;
         statusText = 'Unknown';
     }
 
     return Card(
       margin: EdgeInsets.only(bottom: 12),
+      color: AppTheme.lightTheme.cardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
@@ -388,7 +395,7 @@ class _ConnectionRequestsScreenState extends State<ConnectionRequestsScreen>
             // Profile Photo
             CircleAvatar(
               radius: 24,
-              backgroundColor: Colors.blue[100],
+              backgroundColor: AppTheme.lightTheme.colorScheme.primaryContainer,
               backgroundImage: toUser['photo'] != null
                   ? NetworkImage(toUser['photo'])
                   : null,
@@ -397,8 +404,8 @@ class _ConnectionRequestsScreenState extends State<ConnectionRequestsScreen>
                       (toUser['name'] as String).isNotEmpty
                           ? (toUser['name'] as String)[0].toUpperCase()
                           : 'U',
-                      style: GoogleFonts.inter(
-                        color: Colors.blue,
+                      style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
+                        color: AppTheme.lightTheme.colorScheme.primary,
                         fontWeight: FontWeight.w600,
                       ),
                     )
@@ -413,18 +420,17 @@ class _ConnectionRequestsScreenState extends State<ConnectionRequestsScreen>
                 children: [
                   Text(
                     toUser['name'] ?? 'Unknown User',
-                    style: GoogleFonts.inter(
+                    style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: Colors.black87,
                     ),
                   ),
                   SizedBox(height: 4),
                   Text(
                     '@${toUser['username'] ?? 'unknown'}',
-                    style: GoogleFonts.inter(
+                    style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
                       fontSize: 14,
-                      color: Colors.grey[600],
+                      color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -444,7 +450,7 @@ class _ConnectionRequestsScreenState extends State<ConnectionRequestsScreen>
               ),
               child: Text(
                 statusText,
-                style: GoogleFonts.inter(
+                style: AppTheme.lightTheme.textTheme.labelSmall?.copyWith(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                   color: statusColor,

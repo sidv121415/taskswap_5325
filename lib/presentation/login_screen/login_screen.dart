@@ -67,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppTheme.lightTheme.scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(24.0),
@@ -78,27 +78,34 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 // Logo and Title
-                Icon(
-                  Icons.swap_horizontal_circle,
-                  size: 80,
-                  color: Colors.blue,
+                Container(
+                  width: 20.w,
+                  height: 20.w,
+                  decoration: BoxDecoration(
+                    color: AppTheme.lightTheme.colorScheme.primary,
+                    shape: BoxShape.circle,
+                  ),
+                  child: CustomIconWidget(
+                    iconName: 'assignment',
+                    color: Colors.white,
+                    size: 10.w,
+                  ),
                 ),
                 SizedBox(height: 16),
                 Text(
                   'TaskSwap',
-                  style: GoogleFonts.inter(
+                  style: AppTheme.lightTheme.textTheme.headlineMedium?.copyWith(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black87,
                   ),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 8),
                 Text(
                   'Social Task Exchange',
-                  style: GoogleFonts.inter(
+                  style: AppTheme.lightTheme.textTheme.bodyLarge?.copyWith(
                     fontSize: 16,
-                    color: Colors.grey[600],
+                    color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -111,13 +118,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     labelText: 'Email',
-                    prefixIcon: Icon(Icons.email_outlined),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 16,
+                    prefixIcon: CustomIconWidget(
+                      iconName: 'person',
+                      color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                      size: 20,
                     ),
                   ),
                   validator: (value) {
@@ -140,25 +144,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
                     labelText: 'Password',
-                    prefixIcon: Icon(Icons.lock_outlined),
+                    prefixIcon: CustomIconWidget(
+                      iconName: 'lock',
+                      color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                      size: 20,
+                    ),
                     suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscurePassword
-                            ? Icons.visibility_off
-                            : Icons.visibility,
+                      icon: CustomIconWidget(
+                        iconName: _obscurePassword ? 'visibility_off' : 'visibility',
+                        color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                        size: 20,
                       ),
                       onPressed: () {
                         setState(() {
                           _obscurePassword = !_obscurePassword;
                         });
                       },
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 16,
                     ),
                   ),
                   validator: (value) {
@@ -177,14 +178,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 // Login Button
                 ElevatedButton(
                   onPressed: _isLoading ? null : _handleLogin,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    foregroundColor: Colors.white,
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
                   child: _isLoading
                       ? SizedBox(
                           height: 20,
@@ -211,8 +204,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Text(
                       "Don't have an account? ",
-                      style: GoogleFonts.inter(
-                        color: Colors.grey[600],
+                      style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
+                        color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                       ),
                     ),
                     GestureDetector(
@@ -221,8 +214,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       child: Text(
                         'Sign Up',
-                        style: GoogleFonts.inter(
-                          color: Colors.blue,
+                        style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
+                          color: AppTheme.lightTheme.colorScheme.primary,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -235,32 +228,34 @@ class _LoginScreenState extends State<LoginScreen> {
                 Container(
                   padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.grey[100],
+                    color: AppTheme.lightTheme.colorScheme.surface,
                     borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: AppTheme.lightTheme.colorScheme.outline.withValues(alpha: 0.2),
+                    ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Demo Credentials:',
-                        style: GoogleFonts.inter(
+                        style: AppTheme.lightTheme.textTheme.titleSmall?.copyWith(
                           fontWeight: FontWeight.w600,
-                          color: Colors.grey[700],
                         ),
                       ),
                       SizedBox(height: 8),
                       Text(
                         'Email: sara@example.com',
-                        style: GoogleFonts.inter(
+                        style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
                           fontSize: 14,
-                          color: Colors.grey[600],
+                          color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                         ),
                       ),
                       Text(
                         'Password: password123',
-                        style: GoogleFonts.inter(
+                        style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
                           fontSize: 14,
-                          color: Colors.grey[600],
+                          color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ],

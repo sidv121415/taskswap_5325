@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../presentation/splash_screen/splash_screen.dart';
 import '../presentation/home_dashboard/home_dashboard.dart';
 import '../presentation/my_tasks_screen/my_tasks_screen.dart';
 import '../presentation/create_task_screen/create_task_screen.dart';
@@ -13,6 +14,7 @@ import '../presentation/connection_requests_screen/connection_requests_screen.da
 class AppRoutes {
   // TODO: Add your routes here
   static const String initial = '/';
+  static const String splashScreen = '/splash-screen';
   static const String homeDashboard = '/home-dashboard';
   static const String myTasksScreen = '/my-tasks-screen';
   static const String createTaskScreen = '/create-task-screen';
@@ -25,7 +27,8 @@ class AppRoutes {
   static const String connectionRequestsScreen = '/connection-requests-screen';
 
   static Map<String, WidgetBuilder> routes = {
-    initial: (context) => LoginScreen(),
+    initial: (context) => SplashScreen(),
+    splashScreen: (context) => SplashScreen(),
     homeDashboard: (context) => HomeDashboard(),
     myTasksScreen: (context) => MyTasksScreen(),
     createTaskScreen: (context) => CreateTaskScreen(),

@@ -102,32 +102,40 @@ class _UserSearchScreenState extends State<UserSearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: AppTheme.lightTheme.scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppTheme.lightTheme.appBarTheme.backgroundColor,
         elevation: 0,
         title: Text(
           'Search Users',
-          style: GoogleFonts.inter(
-            color: Colors.black87,
-            fontWeight: FontWeight.w600,
+          style: AppTheme.lightTheme.appBarTheme.titleTextStyle,
+        ),
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: CustomIconWidget(
+            iconName: 'arrow_back',
+            color: AppTheme.lightTheme.colorScheme.onSurface,
+            size: 24,
           ),
         ),
-        iconTheme: IconThemeData(color: Colors.black87),
       ),
       body: Column(
         children: [
           // Search Bar
           Container(
-            color: Colors.white,
+            color: AppTheme.lightTheme.colorScheme.surface,
             padding: EdgeInsets.all(16),
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: 'Search by username or name...',
-                prefixIcon: Icon(Icons.search, color: Colors.grey),
+                prefixIcon: CustomIconWidget(
+                  iconName: 'search',
+                  color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                  size: 20,
+                ),
                 filled: true,
-                fillColor: Colors.grey[100],
+                fillColor: AppTheme.lightTheme.colorScheme.surface,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,
@@ -157,18 +165,18 @@ class _UserSearchScreenState extends State<UserSearchScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(
-                              Icons.search_off,
+                            CustomIconWidget(
+                              iconName: 'search_off',
+                              color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                               size: 64,
-                              color: Colors.grey[400],
                             ),
                             SizedBox(height: 16),
                             Text(
                               'No users found',
-                              style: GoogleFonts.inter(
+                              style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,
-                                color: Colors.grey[600],
+                                color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                               ),
                             ),
                           ],
@@ -191,6 +199,7 @@ class _UserSearchScreenState extends State<UserSearchScreen> {
   Widget _buildUserCard(Map<String, dynamic> user) {
     return Card(
       margin: EdgeInsets.only(bottom: 12),
+      color: AppTheme.lightTheme.cardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
@@ -201,7 +210,7 @@ class _UserSearchScreenState extends State<UserSearchScreen> {
             // Profile Photo
             CircleAvatar(
               radius: 24,
-              backgroundColor: Colors.blue[100],
+              backgroundColor: AppTheme.lightTheme.colorScheme.primaryContainer,
               backgroundImage:
                   user['photo'] != null ? NetworkImage(user['photo']) : null,
               child: user['photo'] == null
@@ -209,8 +218,8 @@ class _UserSearchScreenState extends State<UserSearchScreen> {
                       (user['name'] as String).isNotEmpty
                           ? (user['name'] as String)[0].toUpperCase()
                           : 'U',
-                      style: GoogleFonts.inter(
-                        color: Colors.blue,
+                      style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
+                        color: AppTheme.lightTheme.colorScheme.primary,
                         fontWeight: FontWeight.w600,
                       ),
                     )
@@ -225,27 +234,26 @@ class _UserSearchScreenState extends State<UserSearchScreen> {
                 children: [
                   Text(
                     user['name'] ?? 'Unknown User',
-                    style: GoogleFonts.inter(
+                    style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: Colors.black87,
                     ),
                   ),
                   SizedBox(height: 4),
                   Text(
                     '@${user['username'] ?? 'unknown'}',
-                    style: GoogleFonts.inter(
+                    style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
                       fontSize: 14,
-                      color: Colors.grey[600],
+                      color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                     ),
                   ),
                   if (user['email'] != null) ...[
                     SizedBox(height: 4),
                     Text(
                       user['email'],
-                      style: GoogleFonts.inter(
+                      style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
                         fontSize: 12,
-                        color: Colors.grey[500],
+                        color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -265,9 +273,10 @@ class _UserSearchScreenState extends State<UserSearchScreen> {
                       arguments: user['id'],
                     );
                   },
-                  icon: Icon(
-                    Icons.visibility,
-                    color: Colors.grey[600],
+                  icon: CustomIconWidget(
+                    iconName: 'visibility',
+                    color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                    size: 20,
                   ),
                   tooltip: 'View Profile',
                 ),
@@ -275,7 +284,7 @@ class _UserSearchScreenState extends State<UserSearchScreen> {
                 ElevatedButton(
                   onPressed: () => _sendConnectionRequest(user['id']),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: AppTheme.lightTheme.colorScheme.primary,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -287,9 +296,10 @@ class _UserSearchScreenState extends State<UserSearchScreen> {
                   ),
                   child: Text(
                     'Connect',
-                    style: GoogleFonts.inter(
+                    style: AppTheme.lightTheme.textTheme.labelMedium?.copyWith(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
+                      color: Colors.white,
                     ),
                   ),
                 ),
